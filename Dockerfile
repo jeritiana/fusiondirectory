@@ -9,15 +9,20 @@ EXPOSE 80
 
 RUN export DEBIAN_FRONTEND=noninteractive && \
     export LC_ALL=en_US.UTF-8 && \
+    export LANG=C && \
     apt-get update && \
     apt-get install -y software-properties-common gnupg && \
     gpg --keyserver keys.gnupg.net --recv-keys E184859262B4981F && \
     gpg -a --export E184859262B4981F | apt-key add - && \
     add-apt-repository 'deb http://repos.fusiondirectory.org/debian-jessie jessie main' && \
     apt-get update && \
+    export DEBIAN_FRONTEND=noninteractive && \
+    export LC_ALL=en_US.UTF-8 && \
     apt-get install -y php-mdb2 \
         fusiondirectory=${FUSIONDIRECTORY_DEB_PKG_VERSION} \
-        fusiondirectory-plugin-mail=${FUSIONDIRECTORY_DEB_PKG_VERSION} && \
+        fusiondirectory-plugin-mail=${FUSIONDIRECTORY_DEB_PKG_VERSION} \
+        fusiondirectory-schema=${FUSIONDIRECTORY_DEB_PKG_VERSION} \
+        fusiondirectory-plugin-mail-schema=${FUSIONDIRECTORY_DEB_PKG_VERSION} && \
     rm -rf /var/lib/apt/lists/*
 
 COPY apache.conf /etc/apache2/sites-available/000-default.conf
