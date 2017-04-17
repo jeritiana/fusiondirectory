@@ -24,5 +24,9 @@ EOF
     touch /etc/ldap/fusionready
 fi
 
+if [ "$SMTP_ENABLED" = "true" ]; then
+    envsubst < /msmtp.conf > /etc/msmtprc
+fi
+
 . /etc/apache2/envvars
 /usr/sbin/apache2 -D FOREGROUND
