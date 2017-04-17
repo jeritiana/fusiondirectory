@@ -1,6 +1,6 @@
 FROM debian:jessie
 
-ENV FUSIONDIRECTORY_DEB_PKG_VERSION=1.0.9.1-1 \
+ENV FUSIONDIRECTORY_DEB_PKG_VERSION=1.0.9.3-1 \
     LDAP_DOMAIN=fovea.cc \
     LDAP_PASSWORD=changeme \
     FUSIONDIRECTORY_PASSWORD=changeme2
@@ -13,7 +13,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get install -y software-properties-common gnupg && \
     gpg --keyserver keys.gnupg.net --recv-keys E184859262B4981F && \
     gpg -a --export E184859262B4981F | apt-key add - && \
-    add-apt-repository 'deb http://repos.fusiondirectory.org/debian-jessie jessie main' && \
+    add-apt-repository 'deb http://repos.fusiondirectory.org/official-releases/debian/fusiondirectory-109-jessie jessie main' && \
     apt-get update && \
     apt-get install -y php-mdb2 \
         fusiondirectory=${FUSIONDIRECTORY_DEB_PKG_VERSION} \
